@@ -44,32 +44,40 @@
     }
   }
 
+  const boxFilled = (e) => {
+    if($(e.target).hasClass('box-filled-1') || $(e.target).hasClass('box-filled-2')) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   // When the game starts, player-O is active by default.
   activePlayer('playerO');
 
   // hover-event-listeners for boxes
   $box.mouseover((e) => {
-    if(playerO.active) {
+    if(playerO.active && !boxFilled(e)) {
       $(e.target).addClass('box-hover-1');
-    } else if(playerX.active) {
+    } else if(playerX.active && !boxFilled(e)) {
       $(e.target).addClass('box-hover-2');
     }
   });
   $box.mouseleave((e) => {
-    if(playerO.active) {
+    if(playerO.active && !boxFilled(e)) {
       $(e.target).removeClass('box-hover-1');
-    } else if(playerX.active) {
+    } else if(playerX.active && !boxFilled(e)) {
       $(e.target).removeClass('box-hover-2');
     }
   });
   // When clicking each box, the box is filled with the player's symbol(O/X) and color.
   $box.on('click', (e) => {
-    if(playerO.active) {
+    if(playerO.active && !boxFilled(e)) {
       $(e.target).addClass('box-filled-1');
       activePlayer('playerX');
-    } else if(playerX.active) {
+    } else if(playerX.active && !boxFilled(e)) {
       $(e.target).addClass('box-filled-2');
       activePlayer('playerO');
     }
-  })
+  });
 } ();
