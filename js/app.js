@@ -3,16 +3,25 @@
   const $boardDiv = $('#board');
   const $finishDiv = $('#finish');
   const $startButton = $('#start-button');
-  const $player1Li = $('#player1');
-  const $player2Li = $('#player2');
+  const $playerOLi = $('#player1');
+  const $playerXLi = $('#player2');
+  const $box = $('.box');
+
+  // default player info objects
+  const playerO = {
+    active: false,
+    moves: 0,
+    win: false
+  }
+  const playerX = {
+    active: false,
+    moves: 0,
+    win: false,
+  }
+
   // This only shows start-screen.
   $boardDiv.hide();
   $finishDiv.hide();
-
-  // player info constructor function
-  // function playerInfo(player, ) {
-  //
-  // }
 
   // when clicking the start-button, the game starts.
   $startButton.on('click', () => {
@@ -20,7 +29,47 @@
     $boardDiv.show();
   });
 
-  // Player1 becomes active by default.
-  $player1Li.addClass('active');
+  // a function which adds '.active' class to the selected player.
+  const activePlayer = (player) => {
+    if(player === 'playerO') {
+      playerO.active = true;
+      $playerOLi.addClass('active');
+      playerX.active = false;
+      $playerXLi.removeClass('active');
+    } else if(player === 'playerX') {
+      playerO.active = false;
+      $playerOLi.removeClass('active');
+      playerX.active = true;
+      $playerXLi.addClass('active');
+    }
+  }
 
+  // When the game starts, player-O is active by default.
+  activePlayer('playerO');
+
+  // hover-event-listeners for boxes
+  $box.mouseover((e) => {
+    if(playerO.active) {
+      $(e.target).addClass('box-hover-1');
+    } else if(playerX.active) {
+      $(e.target).addClass('box-hover-2');
+    }
+  });
+  $box.mouseleave((e) => {
+    if(playerO.active) {
+      $(e.target).removeClass('box-hover-1');
+    } else if(playerX.active) {
+      $(e.target).removeClass('box-hover-2');
+    }
+  });
+  // When clicking each box, the box is filled with the player's symbol(O/X) and color.
+  $box.on('click', (e) => {
+    if(playerO.active) {
+      $(e.target).addClass('box-filled-1');
+      activePlayer('playerX');
+    } else if(playerX.active) {
+      $(e.target).addClass('box-filled-2');
+      activePlayer('playerO');
+    }
+  })
 } ();
