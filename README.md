@@ -1,6 +1,6 @@
 # TeamTreehouse FullStack JavaScript Techdegree Project4
 # Tic-Tac-Toe
-![alt text](https://github.com/newKeating/FS-techdegree-project3-Build-an-Interactive-Form/blob/master/Project3-Pass-Confirmed.png)
+![alt text](https://github.com/newKeating/FS-techdegree-project4-Tic-Tac-Toe/blob/master/Project4-Pass-Confirmation.png)
 
 ## About this Project
 
